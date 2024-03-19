@@ -38,36 +38,6 @@ Implement text indexing and search algorithms to enable efficient textual search
 
 
 
-# Problem-1: Storing Versions and Files Efficiently
-import java.util.ArrayList;
-import java.util.List;
-
-class VersionControlSystem {
-    private String baseVersion;
-    private List<String> deltas;
-
-    public VersionControlSystem(String baseVersion) {
-        this.baseVersion = baseVersion;
-        this.deltas = new ArrayList<>();
-    }
-
-    public void addDelta(String delta) {
-        deltas.add(delta);
-    }
-
-    public String applyDeltas() {
-        String currentVersion = baseVersion;
-        for (String delta : deltas) {
-            currentVersion = applyDelta(currentVersion, delta);
-        }
-        return currentVersion;
-    }
-
-    private String applyDelta(String baseVersion, String delta) {
-        return null;
-    }
-}
-
 # Problem-2: Word Count Application with Memory Constraints
 
 import java.io.BufferedReader;
