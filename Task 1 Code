@@ -28,3 +28,88 @@ class VersionControlSystem {
     }
 }
 
+# Problem-2: Word Count Application with Memory Constraints
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class WordCount {
+    public static Map<String, Integer> countWords(String filename) {
+        Map<String, Integer> wordCounts = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split("\\s+");
+                for (String word : words) {
+                    // Remove punctuation and convert to lowercase
+                    word = word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+                    wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, Integer> sortedWordCounts = new TreeMap<>((a, b) -> wordCounts.get(b).compareTo(wordCounts.get(a)));
+        sortedWordCounts.putAll(wordCounts);
+        return sortedWordCounts;
+    }
+
+    public static void main(String[] args) {
+        Map<String, Integer> wordCounts = countWords("large_text_file.txt");
+        for (Map.Entry<String, Integer> entry : wordCounts.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+
+
+# Problem-3: Product Configuration with Efficient Search
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Product {
+    private String name;
+    private String category;
+    private String description;
+    private double price;
+}
+
+class ProductDatabase {
+    private List<Product> products;
+
+    public ProductDatabase() {
+        this.products = new ArrayList<>();
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public List<Product> searchByName(String keyword) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(product);
+            }
+        }
+        return result;
+    }
+
+    public List<Product> searchByCategory(String category) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getCategory().equalsIgnoreCase(category)) {
+                result.add(product);
+            }
+        }
+        return result;
+    }
+}
+
+
+
